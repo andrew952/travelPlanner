@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Planner</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Travel Planner</h1>
+            <div class="view-toggle">
+                <button id="listViewBtn" class="active">List View</button>
+                <button id="mapViewBtn">Map View</button>
+            </div>
+        </header>
+
+        <main>
+            <div id="listView" class="view active">
+                <div class="itinerary-container">
+                    <h2>Your Itinerary</h2>
+                    <div id="itineraryList"></div>
+                </div>
+            </div>
+
+            <div id="mapView" class="view">
+                <div id="map"></div>
+            </div>
+
+            <div class="add-item-form">
+                <h3>Add New Item</h3>
+                <form id="addItemForm">
+                    <select id="itemType">
+                        <option value="spot">Spot</option>
+                        <option value="accommodation">Accommodation</option>
+                        <option value="transportation">Transportation</option>
+                    </select>
+
+                    <div id="spotFields" class="form-fields">
+                        <input type="text" id="spotName" placeholder="Spot Name" required>
+                        <input type="text" id="spotAddress" placeholder="Address" required>
+                        <input type="text" id="visitTime" placeholder="Visit Time">
+                        <textarea id="spotDescription" placeholder="Description"></textarea>
+                    </div>
+
+                    <div id="accommodationFields" class="form-fields" style="display: none;">
+                        <input type="text" id="accommodationName" placeholder="Accommodation Name" required>
+                        <input type="text" id="accommodationAddress" placeholder="Address" required>
+                        <input type="text" id="checkIn" placeholder="Check-in Time">
+                        <input type="text" id="checkOut" placeholder="Check-out Time">
+                    </div>
+
+                    <div id="transportationFields" class="form-fields" style="display: none;">
+                        <select id="fromLocation" required>
+                            <option value="">Select From Location</option>
+                        </select>
+                        <select id="toLocation" required>
+                            <option value="">Select To Location</option>
+                        </select>
+                        <select id="transportType">
+                            <option value="driving">Driving</option>
+                            <option value="walking">Walking</option>
+                            <option value="transit">Public Transit</option>
+                        </select>
+                    </div>
+
+                    <button type="submit">Add Item</button>
+                </form>
+            </div>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html> 
