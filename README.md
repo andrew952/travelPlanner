@@ -42,4 +42,4 @@ A web application that helps users create detailed travel itineraries by adding 
 ![image][index_image]
 
 
-[index_image]: image\index.png
+[index_image]: ./image/index.png
