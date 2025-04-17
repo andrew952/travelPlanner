@@ -39,22 +39,7 @@ A web application that helps users create detailed travel itineraries by adding 
 - Python `requests`, `BeautifulSoup`, or `Selenium`
 - Google Maps data scraping or API usage
 
----
+![image][index_image]
 
-## 📦 Installation
 
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/travelPlanner.git
-cd travelPlanner
-
-# Install backend dependencies
-cd backend
-pip install -r requirements.txt
-
-# Run the backend server
-python app.py
-
-# Open frontend in browser
-cd ../frontend
-open index.html
+[index_image]: image\index.png
