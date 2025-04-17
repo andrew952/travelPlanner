@@ -1,76 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel Planner</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
     <div class="container">
         <header>
-            <h1>Travel Planner</h1>
+            <div class="header-content">
+                <h1>TRAVEL PLANNER</h1>
+                <p class="subtitle">YOUR JOURNEY, YOUR STORY</p>
+            </div>
             <div class="view-toggle">
-                <button id="listViewBtn" class="active">List View</button>
-                <button id="mapViewBtn">Map View</button>
+                <button id="listViewBtn" class="active">
+                    <i class="fas fa-list"></i> LIST VIEW
+                </button>
+                <button id="mapViewBtn">
+                    <i class="fas fa-map"></i> MAP VIEW
+                </button>
             </div>
         </header>
 
         <main>
             <div id="listView" class="view active">
                 <div class="itinerary-container">
-                    <h2>Your Itinerary</h2>
-                    <div id="itineraryList"></div>
+                    <div class="section-header">
+                        <h2>YOUR ITINERARY</h2>
+                        <div class="sort-options">
+                            <button class="sort-btn active" data-sort="time">
+                                <i class="fas fa-clock"></i> TIME
+                            </button>
+                            <button class="sort-btn" data-sort="type">
+                                <i class="fas fa-tags"></i> TYPE
+                            </button>
+                        </div>
+                    </div>
+                    <div id="itineraryList" class="itinerary-list"></div>
                 </div>
             </div>
 
             <div id="mapView" class="view">
-                <div id="map"></div>
+                <div class="map-container">
+                    <div id="map"></div>
+                    <div class="map-controls">
+                        <button class="map-control-btn" id="zoomIn">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <button class="map-control-btn" id="zoomOut">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <div class="add-item-form">
-                <h3>Add New Item</h3>
+                <div class="form-header">
+                    <h3>ADD NEW ITEM</h3>
+                    <div class="form-tabs">
+                        <button class="form-tab active" data-type="spot">
+                            <i class="fas fa-map-marker-alt"></i> SPOT
+                        </button>
+                        <button class="form-tab" data-type="accommodation">
+                            <i class="fas fa-hotel"></i> HOTEL
+                        </button>
+                        <button class="form-tab" data-type="transportation">
+                            <i class="fas fa-route"></i> ROUTE
+                        </button>
+                    </div>
+                </div>
+
                 <form id="addItemForm">
-                    <select id="itemType">
-                        <option value="spot">Spot</option>
-                        <option value="accommodation">Accommodation</option>
-                        <option value="transportation">Transportation</option>
-                    </select>
-
-                    <div id="spotFields" class="form-fields">
-                        <input type="text" id="spotName" placeholder="Spot Name" required>
-                        <input type="text" id="spotAddress" placeholder="Address" required>
-                        <input type="text" id="visitTime" placeholder="Visit Time">
-                        <textarea id="spotDescription" placeholder="Description"></textarea>
+                    <div id="spotFields" class="form-fields active">
+                        <div class="form-group">
+                            <label for="spotName">SPOT NAME</label>
+                            <input type="text" id="spotName" placeholder="ENTER SPOT NAME" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="spotAddress">ADDRESS</label>
+                            <input type="text" id="spotAddress" placeholder="ENTER ADDRESS" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="visitTime">VISIT TIME</label>
+                            <input type="datetime-local" id="visitTime">
+                        </div>
+                        <div class="form-group">
+                            <label for="spotDescription">DESCRIPTION</label>
+                            <textarea id="spotDescription" placeholder="ADD SOME DETAILS ABOUT THIS SPOT"></textarea>
+                        </div>
                     </div>
 
-                    <div id="accommodationFields" class="form-fields" style="display: none;">
-                        <input type="text" id="accommodationName" placeholder="Accommodation Name" required>
-                        <input type="text" id="accommodationAddress" placeholder="Address" required>
-                        <input type="text" id="checkIn" placeholder="Check-in Time">
-                        <input type="text" id="checkOut" placeholder="Check-out Time">
+                    <div id="accommodationFields" class="form-fields">
+                        <div class="form-group">
+                            <label for="accommodationName">HOTEL NAME</label>
+                            <input type="text" id="accommodationName" placeholder="ENTER HOTEL NAME" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="accommodationAddress">ADDRESS</label>
+                            <input type="text" id="accommodationAddress" placeholder="ENTER ADDRESS" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="checkIn">CHECK-IN TIME</label>
+                            <input type="datetime-local" id="checkIn">
+                        </div>
+                        <div class="form-group">
+                            <label for="checkOut">CHECK-OUT TIME</label>
+                            <input type="datetime-local" id="checkOut">
+                        </div>
                     </div>
 
-                    <div id="transportationFields" class="form-fields" style="display: none;">
-                        <select id="fromLocation" required>
-                            <option value="">Select From Location</option>
-                        </select>
-                        <select id="toLocation" required>
-                            <option value="">Select To Location</option>
-                        </select>
-                        <select id="transportType">
-                            <option value="driving">Driving</option>
-                            <option value="walking">Walking</option>
-                            <option value="transit">Public Transit</option>
-                        </select>
+                    <div id="transportationFields" class="form-fields">
+                        <div class="form-group">
+                            <label for="fromLocation">FROM LOCATION</label>
+                            <select id="fromLocation" required>
+                                <option value="">SELECT STARTING POINT</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="toLocation">TO LOCATION</label>
+                            <select id="toLocation" required>
+                                <option value="">SELECT DESTINATION</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="transportType">TRANSPORT TYPE</label>
+                            <select id="transportType">
+                                <option value="driving"><i class="fas fa-car"></i> DRIVING</option>
+                                <option value="walking"><i class="fas fa-walking"></i> WALKING</option>
+                                <option value="transit"><i class="fas fa-bus"></i> PUBLIC TRANSIT</option>
+                            </select>
+                        </div>
                     </div>
 
-                    <button type="submit">Add Item</button>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-plus"></i> ADD ITEM
+                    </button>
                 </form>
             </div>
         </main>
     </div>
     <script src="app.js"></script>
 </body>
-</html> 
+
+</html>
